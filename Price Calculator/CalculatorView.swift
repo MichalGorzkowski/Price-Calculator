@@ -17,8 +17,8 @@ struct CalculatorView: View {
     @State var isVatIncludedSellPrice: Bool = true
     
     //Shipment price input
-    @State var inputShippmentPrice: String = "0"
-    @State var isVatIncludedShippmentPrice: Bool = true
+    //@State var inputShippmentPrice: String = "0"
+    //@State var isVatIncludedShippmentPrice: Bool = true
     
     // Commission Percent input
     @State var inputCommissionPercent: String = "8"
@@ -36,8 +36,32 @@ struct CalculatorView: View {
     }
     
     var shippmentPrice: Double {
-        guard let price = Double(inputShippmentPrice) else { return 0 }
-        return isVatIncludedShippmentPrice ? price : round((price/1.23) * 100) / 100.0
+        var price: Double = 0.0
+        
+        switch sellPrice {
+        case 40..<50:
+            price = 2.09 / 1.23
+        case 50..<60:
+            price = 2.49 / 1.23
+        case 60..<70:
+            price = 2.79 / 1.23
+        case 70..<80:
+            price = 3.49 / 1.23
+        case 80..<100:
+            price = 4.99 / 1.23
+        case 100..<150:
+            price = 5.99 / 1.23
+        case 150..<200:
+            price = 6.99 / 1.23
+        case 200..<300:
+            price = 9.49 / 1.23
+        case 300..<800:
+            price = 10.99 / 1.23
+        default:
+            price = 0.0
+        }
+        
+        return Double(round(price * 100) / 100.0)
     }
     
     // Commission price without VAT
@@ -130,22 +154,23 @@ struct CalculatorView: View {
                         
                         Spacer()
                         
-                        Text("VAT")
+                        Text("with VAT")
                             .font(.system(.footnote))
                             .foregroundColor(.gray)
                         
-                        CheckBoxView(checked: $isVatIncludedShippmentPrice)
+                        //CheckBoxView(checked: $isVatIncludedShippmentPrice)
                     }
                     
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         Rectangle()
                             .frame(width: .infinity, height: 50)
                             .cornerRadius(10)
                             .foregroundColor(Color(UIColor.lightGray))
                         
-                        TextField("Price", text: $inputShippmentPrice)
+                        Text("\(shippmentPrice, specifier: "%.2f")")
                             .foregroundColor(.black)
                             .padding(.horizontal)
+                            .frame()
                     }
                 }
                 
@@ -172,20 +197,20 @@ struct CalculatorView: View {
             
             VStack {
                 Text("Commission Fee")
-                Text(String(commission))
+                Text("\(commission, specifier: "%.2f")")
             }
             .padding()
             
             VStack {
                 Text("Transaction Fee")
-                Text(String(transaction))
+                Text("\(transaction, specifier: "%.2f")")
             }
             .padding()
             
             VStack {
                 Text("Result")
 
-                Text("\(calculation)")
+                Text("\(calculation, specifier: "%.2f")")
                     .foregroundColor(calculation>0.0 ? .green : .red)
             }
             .padding()
@@ -197,6 +222,6 @@ struct CalculatorView: View {
 
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView(inputBuyPrice: "123", isVatIncludedBuyPrice: true, inputSellPrice: "123", isVatIncludedSellPrice: true, inputShippmentPrice: "0", isVatIncludedShippmentPrice: true, inputCommissionPercent: "8")
+        CalculatorView()
     }
 }
