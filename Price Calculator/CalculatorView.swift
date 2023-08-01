@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalculatorView: View {
+    
     // Buy price input
     @State var inputBuyPrice: String = ""
     @State var isVatIncludedBuyPrice: Bool = true
@@ -16,22 +17,21 @@ struct CalculatorView: View {
     @State var inputSellPrice: String = ""
     @State var isVatIncludedSellPrice: Bool = true
     
-    //Shipment price input
-    //@State var inputShippmentPrice: String = "0"
-    //@State var isVatIncludedShippmentPrice: Bool = true
-    
     // Commission Percent input
     @State var inputCommissionPercent: String = "8"
+    
+    // Large shipment input
+    @State var isXXL: Bool = false
     
     
     // Prices without VAT
     var buyPrice: Double {
-        guard let price = Double(inputBuyPrice) else { return 0 }
+        guard let price = Double(inputBuyPrice.replacingOccurrences(of: ",", with: ".")) else { return 0 }
         return isVatIncludedBuyPrice ? round((price/1.23) * 100) / 100.0 : price
     }
     
     var sellPrice: Double {
-        guard let price = Double(inputSellPrice) else { return 0 }
+        guard let price = Double(inputSellPrice.replacingOccurrences(of: ",", with: ".")) else { return 0 }
         return isVatIncludedSellPrice ? round((price/1.23) * 100) / 100.0 : price
     }
     
@@ -55,7 +55,7 @@ struct CalculatorView: View {
             price = 6.99 / 1.23
         case 200..<300:
             price = 9.49 / 1.23
-        case 300..<800:
+        case 300...:
             price = 10.99 / 1.23
         default:
             price = 0.0
@@ -81,10 +81,10 @@ struct CalculatorView: View {
         let shippment = shippmentPrice
         let commission = commission
         
-        return round((sell - buy - shippment - commission - transaction) * 100) / 100
+        var standardResult = sell - buy - shippment - commission
+        
+        return isXXL ? (standardResult - 4.06) : standardResult
     }
-    
-    
     
     var body: some View {
         VStack {
@@ -113,6 +113,7 @@ struct CalculatorView: View {
                         TextField("Price", text: $inputBuyPrice)
                             .foregroundColor(.black)
                             .padding(.horizontal)
+                            .keyboardType(.decimalPad)
                     }
                 }
                 
@@ -140,6 +141,7 @@ struct CalculatorView: View {
                         TextField("Price", text: $inputSellPrice)
                             .foregroundColor(.black)
                             .padding(.horizontal)
+                            .keyboardType(.decimalPad)
                     }
                 }
             }
@@ -170,7 +172,6 @@ struct CalculatorView: View {
                         Text("\(shippmentPrice, specifier: "%.2f")")
                             .foregroundColor(.black)
                             .padding(.horizontal)
-                            .frame()
                     }
                 }
                 
@@ -190,10 +191,21 @@ struct CalculatorView: View {
                         TextField("Percent", text: $inputCommissionPercent)
                             .foregroundColor(.black)
                             .padding(.horizontal)
+                            .keyboardType(.decimalPad)
                     }
                 }
             }
             .padding()
+            
+            HStack {
+                Text("XXL")
+                    .font(.system(.footnote))
+                .foregroundColor(.gray)
+                
+                CheckBoxView(checked: $isXXL)
+            }
+            .padding()
+            
             
             VStack {
                 Text("Commission Fee")
@@ -207,16 +219,19 @@ struct CalculatorView: View {
             }
             .padding()
             
-            VStack {
+            VStack(spacing: 5) {
                 Text("Result")
 
                 Text("\(calculation, specifier: "%.2f")")
                     .foregroundColor(calculation>0.0 ? .green : .red)
+                    .font(.system(size: 25))
+                    .bold()
             }
             .padding()
             
             Spacer()
         }
+        .padding(.top, 20)
     }
 }
 
