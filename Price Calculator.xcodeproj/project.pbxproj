@@ -14,6 +14,8 @@
 		FB92E64E2A7907D600C85739 /* Price_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB92E64D2A7907D600C85739 /* Price_CalculatorTests.swift */; };
 		FB92E6582A7907D600C85739 /* Price_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB92E6572A7907D600C85739 /* Price_CalculatorUITests.swift */; };
 		FB92E65A2A7907D600C85739 /* Price_CalculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB92E6592A7907D600C85739 /* Price_CalculatorUITestsLaunchTests.swift */; };
+		FB92E6672A7908E500C85739 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB92E6662A7908E500C85739 /* CalculatorView.swift */; };
+		FB92E66B2A7910A600C85739 /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB92E66A2A7910A600C85739 /* CheckboxView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		FB92E6532A7907D600C85739 /* Price CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Price CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB92E6572A7907D600C85739 /* Price_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price_CalculatorUITests.swift; sourceTree = "<group>"; };
 		FB92E6592A7907D600C85739 /* Price_CalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price_CalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FB92E6662A7908E500C85739 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		FB92E66A2A7910A600C85739 /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +98,10 @@
 		FB92E63B2A7907D500C85739 /* Price Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				FB92E63C2A7907D500C85739 /* Price_CalculatorApp.swift */,
+				FB92E6662A7908E500C85739 /* CalculatorView.swift */,
+				FB92E66A2A7910A600C85739 /* CheckboxView.swift */,
 				FB92E63E2A7907D500C85739 /* ContentView.swift */,
+				FB92E63C2A7907D500C85739 /* Price_CalculatorApp.swift */,
 				FB92E6402A7907D600C85739 /* Assets.xcassets */,
 				FB92E6422A7907D600C85739 /* Preview Content */,
 			);
@@ -258,7 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB92E63F2A7907D500C85739 /* ContentView.swift in Sources */,
+				FB92E6672A7908E500C85739 /* CalculatorView.swift in Sources */,
 				FB92E63D2A7907D500C85739 /* Price_CalculatorApp.swift in Sources */,
+				FB92E66B2A7910A600C85739 /* CheckboxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
