@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CalculatorView: View {
     // Buy price input
-    @State var inputBuyPrice: String = "0"
+    @State var inputBuyPrice: String = ""
     @State var isVatIncludedBuyPrice: Bool = true
     
     // Sell price input
-    @State var inputSellPrice: String = "0"
+    @State var inputSellPrice: String = ""
     @State var isVatIncludedSellPrice: Bool = true
     
     //Shipment price input
