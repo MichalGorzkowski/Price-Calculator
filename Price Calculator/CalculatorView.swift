@@ -61,7 +61,7 @@ struct CalculatorView: View {
             price = 0.0
         }
         
-        return Double(round(price * 100) / 100.0)
+        return isXXL ? (price + 4.06) : price
     }
     
     // Commission price without VAT
@@ -81,9 +81,7 @@ struct CalculatorView: View {
         let shippment = shippmentPrice
         let commission = commission
         
-        var standardResult = sell - buy - shippment - commission
-        
-        return isXXL ? (standardResult - 4.06) : standardResult
+        return sell - buy - shippment - commission
     }
     
     var body: some View {
